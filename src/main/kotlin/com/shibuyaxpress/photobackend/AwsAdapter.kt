@@ -8,8 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.springframework.web.multipart.MultipartFile
+import java.awt.image.BufferedImage
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
 import java.lang.RuntimeException
 import java.net.URL
+import javax.imageio.ImageIO
 
 @Component
 class AwsAdapter {
@@ -21,6 +25,23 @@ class AwsAdapter {
 
     @Autowired
     private lateinit var amazonS3Client: AmazonS3
+
+    fun uploadBufferedImageToS3(image: BufferedImage, fileName: String, imageType: String): URL? {
+        val outstream = ByteArrayOutputStream()
+        ImageIO.write(image, "png", outstream)
+        val buffer = outstream.toByteArray()
+        val inputStream = ByteArrayInputStream(buffer)
+        val meta = ObjectMetadata()
+        meta.contentType = imageType
+        meta.contentLength = buffer.size.toLong()
+        try {
+            amazonS3Client.putObject(PutObjectRequest(bucketName, fileName, inputStream, meta)
+                .withCannedAcl(CannedAccessControlList.PublicRead))
+        } catch (exception: Exception) {
+            throw RuntimeException("Error while uploading file with name $fileName")
+        }
+        return amazonS3Client.getUrl(bucketName, fileName)
+    }
 
     fun storeObjectInS3(file: MultipartFile, fileName: String, contentType: String): URL? {
         val objectMetadata = ObjectMetadata()

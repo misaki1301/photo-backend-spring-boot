@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "com.shibuyaxpress"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.2-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
@@ -18,6 +18,7 @@ repositories {
 extra["springCloudVersion"] = "Hoxton.SR9"
 
 dependencies {
+	implementation( "org.imgscalr:imgscalr-lib:4.2")
 	implementation("com.amazonaws:aws-java-sdk-s3")
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 	implementation("org.springframework.boot:spring-boot-starter-data-rest")
@@ -45,4 +46,10 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+tasks {
+	"bootJar"(org.springframework.boot.gradle.tasks.bundling.BootJar::class) {
+		mainClassName = "com.shibuyaxpress.photobackend.PhotoBackendApplication"
+	}
 }
