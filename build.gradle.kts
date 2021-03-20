@@ -48,6 +48,11 @@ tasks.withType<KotlinCompile> {
 	}
 }
 
+tasks.withType<org.springframework.boot.gradle.tasks.bundling.BootJar> {
+	archiveFileName.set("app.jar")
+	mainClassName = "com.shibuyaxpress.photobackend.PhotoBackendApplication"
+}
+
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
