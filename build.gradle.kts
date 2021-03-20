@@ -50,7 +50,7 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<org.springframework.boot.gradle.tasks.bundling.BootJar> {
 	archiveFileName.set("app.jar")
-	mainClassName = "com.shibuyaxpress.photobackend.PhotoBackendApplication"
+	mainClassName = "com.shibuyaxpress.photobackend.PhotoBackendApplicationKt"
 }
 
 tasks.withType<Test> {
@@ -59,6 +59,6 @@ tasks.withType<Test> {
 
 tasks {
 	"bootJar"(org.springframework.boot.gradle.tasks.bundling.BootJar::class) {
-		mainClassName = "com.shibuyaxpress.photobackend.PhotoBackendApplication"
+		mainClassName = "com.shibuyaxpress.photobackend.PhotoBackendApplicationKt"
 	}
 }
