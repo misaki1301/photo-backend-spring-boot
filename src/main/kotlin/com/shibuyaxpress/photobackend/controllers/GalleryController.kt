@@ -1,5 +1,8 @@
-package com.shibuyaxpress.photobackend
+package com.shibuyaxpress.photobackend.controllers
 
+import com.shibuyaxpress.photobackend.AwsAdapter
+import com.shibuyaxpress.photobackend.Photo
+import com.shibuyaxpress.photobackend.PhotoRepository
 import org.imgscalr.Scalr
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Sort

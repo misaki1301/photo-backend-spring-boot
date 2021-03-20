@@ -1,5 +1,7 @@
 package com.shibuyaxpress.photobackend
 
+import com.shibuyaxpress.photobackend.models.Product
+import com.shibuyaxpress.photobackend.models.ProductType
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
 
@@ -18,3 +20,9 @@ interface BankAccountRepository: MongoRepository<BankAccount, String>
 
 @Repository
 interface BankTransactionRepository: MongoRepository<BankTransaction, String>
+
+@Repository
+interface ProductRepository: MongoRepository<Product, String>
+
+@Repository
+interface ProductTypeRepository: MongoRepository<ProductType, String>

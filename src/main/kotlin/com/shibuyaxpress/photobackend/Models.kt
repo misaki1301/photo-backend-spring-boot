@@ -68,6 +68,6 @@ data class Issue(
     var description: String? = null,
     var severity: String? = null,
     var assignee: String? = null,
-    @JsonFormat(pattern = "yyyy/MM/dd")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "America/Lima")
     var createdAt: LocalDateTime = LocalDateTime.now()
 )
