@@ -67,7 +67,9 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
         // We don't need CSRF for this example
         httpSecurity.csrf().disable()
             // dont authenticate this particular request
-            .authorizeRequests().antMatchers("/authenticate","/products/**", "/photos").permitAll().anyRequest()
+            .authorizeRequests().antMatchers("/authenticate","/products/**", "/photos", "/create/account")
+            .permitAll()
+            .anyRequest()
             // all other requests need to be authenticated
         .authenticated().and().exceptionHandling()
             // make sure we use stateless session; session won't be used to
