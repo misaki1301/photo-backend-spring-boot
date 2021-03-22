@@ -12,6 +12,7 @@ import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
+import org.springframework.web.servlet.function.EntityResponse
 import java.util.*
 import javax.imageio.ImageIO
 
@@ -29,8 +30,12 @@ class StoreController(private val productRepository: ProductRepository,
     }
 
     @GetMapping("/products/types")
-    fun getTypeList(): List<ProductType> {
-        return productTypeRepository.findAll(Sort.by(Sort.Direction.DESC, "name"))
+    fun getTypeList(): ResponseEntity<MutableList<ProductType>> {
+        return try {
+            ResponseEntity.ok(productTypeRepository.findAll(Sort.by(Sort.Direction.DESC, "name")))
+        } catch (e: Exception) {
+            ResponseEntity.noContent().build()
+        }
     }
 
     @PostMapping("/types")
