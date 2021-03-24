@@ -13,7 +13,7 @@ import java.security.SecureRandom
 import kotlin.Exception
 
 @Service
-class JwUserDetailsService:  UserDetailsService {
+class JwtUserDetailsService:  UserDetailsService {
 
     @Autowired
     private lateinit var userRepository: UserRepository

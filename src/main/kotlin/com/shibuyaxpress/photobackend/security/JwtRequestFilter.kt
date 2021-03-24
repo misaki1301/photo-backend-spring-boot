@@ -1,6 +1,6 @@
 package com.shibuyaxpress.photobackend.security
 
-import com.shibuyaxpress.photobackend.services.JwUserDetailsService
+import com.shibuyaxpress.photobackend.services.JwtUserDetailsService
 import io.jsonwebtoken.ExpiredJwtException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse
 @Component
 class JwtRequestFilter: OncePerRequestFilter() {
     @Autowired
-    private lateinit var jwtUserDetailsService: JwUserDetailsService
+    private lateinit var jwtUserDetailsService: JwtUserDetailsService
     @Autowired
     private lateinit var jwtTokenUtil: JwtTokenUtil
 
@@ -44,10 +44,10 @@ class JwtRequestFilter: OncePerRequestFilter() {
         }
 
         if (username != null && SecurityContextHolder.getContext().authentication == null) {
-            var userDetails = this.jwtUserDetailsService.loadUserByUsername(username)
+            val userDetails = this.jwtUserDetailsService.loadUserByUsername(username)
 
             if (jwtTokenUtil.validateToken(token!!, userDetails)) {
-                var usernamePasswordAuthenticationToken = UsernamePasswordAuthenticationToken(userDetails, null, userDetails.authorities)
+                val usernamePasswordAuthenticationToken = UsernamePasswordAuthenticationToken(userDetails, null, userDetails.authorities)
                 usernamePasswordAuthenticationToken.details = WebAuthenticationDetailsSource().buildDetails(request)
                 SecurityContextHolder.getContext().authentication = usernamePasswordAuthenticationToken
             }

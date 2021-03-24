@@ -36,12 +36,13 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     @Autowired
     private lateinit var jwtAuthenticationEntryPoint: JwtAuthenticationEntryPoint
 
-    @Qualifier("jwUserDetailsService")
+    @Qualifier("jwtUserDetailsService")
     @Autowired
     private lateinit var jwtUserDetailsService: UserDetailsService
 
     @Autowired
     private lateinit var jwtRequestFilter: JwtRequestFilter
+
     @Autowired
     @Throws(Exception::class)
     fun configureGlobal(auth: AuthenticationManagerBuilder) {

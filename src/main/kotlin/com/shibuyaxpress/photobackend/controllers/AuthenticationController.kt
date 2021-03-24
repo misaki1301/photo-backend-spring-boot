@@ -4,14 +4,13 @@ import com.shibuyaxpress.photobackend.PersonRepository
 import com.shibuyaxpress.photobackend.UserRepository
 import com.shibuyaxpress.photobackend.models.User
 import com.shibuyaxpress.photobackend.security.JwtTokenUtil
-import com.shibuyaxpress.photobackend.services.JwUserDetailsService
+import com.shibuyaxpress.photobackend.services.JwtUserDetailsService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.authentication.DisabledException
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.web.bind.annotation.*
 import java.security.SecureRandom
@@ -26,7 +25,7 @@ class AuthenticationController(private val userRepository: UserRepository,
     private lateinit var jwtTokenUtil: JwtTokenUtil
 
     @Autowired
-    private lateinit var userDetailsService: JwUserDetailsService
+    private lateinit var userDetailsService: JwtUserDetailsService
 
 
     @PostMapping("/authenticate")
