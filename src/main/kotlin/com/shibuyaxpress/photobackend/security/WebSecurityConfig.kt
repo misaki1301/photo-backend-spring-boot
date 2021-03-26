@@ -66,9 +66,9 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     @Throws(Exception::class)
     override fun configure(httpSecurity: HttpSecurity) {
         // We don't need CSRF for this example
-        httpSecurity.csrf().disable()
+        httpSecurity.csrf().disable().cors().and()
             // dont authenticate this particular request
-            .authorizeRequests().antMatchers("/authenticate","/products/**", "/photos", "/create/account")
+            .authorizeRequests().antMatchers("/authenticate","/products/**", "/photos", "/create/account", "auth/user")
             .permitAll()
             .anyRequest()
             // all other requests need to be authenticated

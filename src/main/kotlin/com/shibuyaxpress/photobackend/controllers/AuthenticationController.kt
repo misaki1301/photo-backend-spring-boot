@@ -11,6 +11,9 @@ import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.authentication.DisabledException
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.context.SecurityContext
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.web.bind.annotation.*
 import java.security.SecureRandom
@@ -39,6 +42,16 @@ class AuthenticationController(private val userRepository: UserRepository,
         val token = jwtTokenUtil.generateToken(userDetails)
 
         return  ResponseEntity.ok(JwResponse(jwttoken = token, user = user!!))
+    }
+
+    @GetMapping("/auth/user")
+    fun getUserAuthenticated(): ResponseEntity<Any> {
+        val userDetails = SecurityContextHolder.getContext().authentication.principal as UserDetails
+        try {
+            return ResponseEntity.ok(UserResponse(userRepository.findUserByUsername(userDetails.username)!!))
+        } catch (e: Exception) {
+            return ResponseEntity.badRequest().build()
+        }
     }
 
     private fun authenticate(username: String, password: String) {
@@ -70,5 +83,9 @@ data class JwtRequest(
 data class JwResponse(
     var serialVersionUID: Long = -8091879091924046844L,
     var jwttoken: String,
+    var user: User
+)
+
+data class UserResponse(
     var user: User
 )
