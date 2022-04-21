@@ -12,7 +12,8 @@ data class User(
     var username: String? = null,
     var password: String? = null,
     var email: String? = null,
-    var person: Person?
+    var person: Person?,
+    var isActive: Boolean = true
 )
 
 @Document(collection = "people")
@@ -22,5 +23,6 @@ data class Person(
     var firstName: String? = null,
     var lastName: String? = null,
     var email: String? = null,
-    var profileImage: String? = null
+    var profileImage: String? = null,
+    var isActive: Boolean = true
 )

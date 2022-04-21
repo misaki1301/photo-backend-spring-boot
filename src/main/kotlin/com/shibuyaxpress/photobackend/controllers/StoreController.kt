@@ -5,6 +5,7 @@ import com.shibuyaxpress.photobackend.ProductRepository
 import com.shibuyaxpress.photobackend.ProductTypeRepository
 import com.shibuyaxpress.photobackend.models.Product
 import com.shibuyaxpress.photobackend.models.ProductType
+import com.shibuyaxpress.photobackend.services.FirebaseStorage
 import org.imgscalr.Scalr
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Sort
@@ -18,18 +19,29 @@ import javax.imageio.ImageIO
 
 @RestController
 @CrossOrigin(origins = ["*"])
+@RequestMapping("/api/products")
 class StoreController(private val productRepository: ProductRepository,
                       private val productTypeRepository: ProductTypeRepository) {
 
     @Autowired
-    private lateinit var awsAdapter: AwsAdapter
+    private lateinit var firebaseStorage: FirebaseStorage
 
-    @GetMapping("/products")
+    @GetMapping
     fun getProductsList(): List<Product> {
         return productRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"))
     }
 
-    @GetMapping("/products/types")
+    @GetMapping("/{id}")
+    fun getProductById(@PathVariable id: String): ResponseEntity<Product> {
+        val product = productRepository.findByIdOrNull(id)
+        return if (product != null) {
+            ResponseEntity.ok(product)
+        } else {
+            ResponseEntity.notFound().build()
+        }
+    }
+
+    @GetMapping("/types")
     fun getTypeList(): ResponseEntity<MutableList<ProductType>> {
         return try {
             ResponseEntity.ok(productTypeRepository.findAll(Sort.by(Sort.Direction.DESC, "name")))
@@ -43,13 +55,14 @@ class StoreController(private val productRepository: ProductRepository,
         return productTypeRepository.save(item)
     }
 
-    @PostMapping("/products")
+    @PostMapping
     fun createProduct(@RequestPart image: MultipartFile,
                       @RequestPart(required = true) name: String,
                       @RequestPart(required = false) description: String?,
                       @RequestPart(required = true) price: String,
                       @RequestPart(required = true) type: String): ResponseEntity<Any> {
-        val url = awsAdapter.storeObjectInS3(image, "basy-store/${image.originalFilename}", image.contentType!!)
+        var url = firebaseStorage.save(image)
+        url = firebaseStorage.getImageURL(url)
         val thumb = createThumbForProduct(image)
         val desc = if (description.isNullOrEmpty()){
             ""
@@ -57,7 +70,7 @@ class StoreController(private val productRepository: ProductRepository,
             description
         }
         val productType = productTypeRepository.findByIdOrNull(type) ?: return ResponseEntity.notFound().build()
-        val item = Product(null, name, desc, price.toDouble(), url.toString(), thumb, productType)
+        val item = Product(null, name, desc, price.toDouble(), url, thumb, productType)
         val product = productRepository.save(item)
         return ResponseEntity.ok(product)
     }
@@ -65,9 +78,6 @@ class StoreController(private val productRepository: ProductRepository,
     private fun createThumbForProduct(file: MultipartFile): String {
         val img = ImageIO.read(file.inputStream)
         val thumbnail = Scalr.resize(img, 250)
-        //val ext = file.originalFilename!!.split("\\.")[1]
-        return awsAdapter
-            .uploadBufferedImageToS3(thumbnail,"basy-store/${UUID.randomUUID()}+.png", file.contentType!!)
-            .toString()
+        return firebaseStorage.getImageURL(firebaseStorage.save(thumbnail, file.originalFilename!!))
     }
 }

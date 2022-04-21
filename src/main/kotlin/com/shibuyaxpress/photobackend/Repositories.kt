@@ -1,9 +1,7 @@
 package com.shibuyaxpress.photobackend
 
-import com.shibuyaxpress.photobackend.models.Person
-import com.shibuyaxpress.photobackend.models.Product
-import com.shibuyaxpress.photobackend.models.ProductType
-import com.shibuyaxpress.photobackend.models.User
+import com.shibuyaxpress.photobackend.models.*
+import org.springframework.boot.autoconfigure.data.ConditionalOnRepositoryType
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
 
@@ -36,3 +34,14 @@ interface UserRepository: MongoRepository<User, String> {
 
 @Repository
 interface PersonRepository: MongoRepository<Person, String>
+
+@Repository
+interface OrderRepository: MongoRepository<Order, String>
+
+@Repository
+interface ColorRepository: MongoRepository<Color, String> {
+    fun getAllByActiveTrue(): List<Color>
+}
+
+@Repository
+interface SizeRepository: MongoRepository<Size, String>

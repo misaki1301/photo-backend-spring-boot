@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "valery-girls",
+  "private_key_id": "55360a08b598f75b4b8b57acd75cd1c059abe378",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC1pBdwl9feVXQ9\nfP6uHpWJysKcjXfGEGS9knjvopFiIad/yw3ezWucpEbyAIw+Uk5Hsr1DmmHdOSnh\nZ0wvkyQsyCyfyQImIZr76a6KGg3PgquUJNxRACg1gykbGI8ti1Jau8+WtnaTU0Gl\n/OrO94F8VQWOOxX6AkO/WVkyHz+Wc7HPkzwBSBwX8Hr9JsVTgkK0lsWRflXwSjM4\nyXKqBOFlY4tYSkG5+awKzkCOptqw2ZYfa/A//EVt80ZDrf2edzUceu8CwP2XmSai\nuoAZV4t9ODMEafA6Xf4PihNentD7oO6DTYIxZD0ZC+gZTYKaL8rNr2k5kGBTBEhg\n3UDQgEGRAgMBAAECggEAA0qPYCtoLm+m9QxEQxxrwjzpzNNlZbHbWXIDffgYoUoR\n0md3/18CgaqaXH01DVYJdBQhiM2N02fbQenQwBXu9F7GLDkEsHMwbzsbPgZd1LI9\n8KfAVDloARw4zPRjd8RMADfh+Y2h1WaPTHYqPQjQEFQsDxkz+z06RAfW7WkSimPT\nb38jE0y2D+Bcfa0oYn9MXZYuYusT2iUJBVDhG1oaULLXYRfkf6o+9n06ihhqNOzE\nDia3n/ftikCm4hm4gw3T00RkyCHvxp/+VLykyFHl+QYLSo8Y0F49vfLbU1XR5XTs\nVkvX0MLJkSrfhP4UUe8S7RsouTeoLD12OG7/PTEqiQKBgQDrCiJP/zqd91eVTz1m\nJCo92kfsfXCW1COADiPxvm39t8LNNvR8dH3bueF5bfYYWZQpQHFqFXFA+xWIL93Q\nwGheDOyVzVBgVv3/G/K/cAvMzLFnfQljdjfzIGS/Cr7WlF7Jt9QyvwD+LcXGb+gZ\neAIr2vEe0vAU1k3c73+2CbMx3QKBgQDF1uMpyPhlUR56GOoc+AIj68KDCnfcYXvs\n+Uzq09Sd35vEgP5VX5+uGJ4V2hkkWyhTjvCn3T8huoE619wdnCAcx7iXZcpQmcw1\nRhyvvwfGQGv+0HuGTm486FVzwsJJPuBQucHvtRZSORxgbJTg4n9bAIWhTkqgO1z2\ng4jxrLyFRQKBgQCqb0/QWJCF6czd3Xb1cTYcYgOTrqaNCMmxWw+fheo2eCFPNBF3\nifWV9qVUq3Mv1w1EGJHlTiUw7KGBfsxHSq6jvJV2T0qAgbRvYDHXtgUofioKlDXR\npPEPYScNDVqzOSW++olqPu0WY9Stf4p7pXVVnc8I/gbP5VLS6eze8Qu7FQKBgECV\nP57aXkwkyQAute4y/+/d/KdueWZV5HCdiYB3GkdXQbBKM7yG9MeOfbzAb8iwgV+V\nn/YMgZlvGtSstsxrtQfwItA5iGv7aPBTLPYqNE2Bpj+Oq2RSoiX76jlZ8Laccfmo\nSikIQnsg7aSEja1EAzMf3n+j4TShbF2E3uWV8AzJAoGAdQiBkc8bYKE1lH2rEpkU\nEIYXa0szSmRmvKvHwLICdsl9IQ8My+kP5psjE7X2IDQW/2vUs0t6clbYFZ4ZkiP4\nN/YFJXuCavYC92tI208vQJxKbyqHGBDMpWeqwPiK26BhC0n334HXK+iQDOkuzK8I\nIjNTL0RwF+Q/JMLeSgZUwAk=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-qx3yx@valery-girls.iam.gserviceaccount.com",
+  "client_id": "109374619715592008877",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-qx3yx%40valery-girls.iam.gserviceaccount.com"
+}

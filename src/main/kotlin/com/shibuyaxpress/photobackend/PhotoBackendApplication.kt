@@ -12,10 +12,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
-
-
-
-
 @SpringBootApplication
 class PhotoBackendApplication
 
@@ -29,29 +25,5 @@ fun corsConfigurer(): WebMvcConfigurer? {
 }
 fun main(args: Array<String>) {
 	runApplication<PhotoBackendApplication>(*args)
-}
-
-@RestController
-@CrossOrigin(origins = ["*"])
-class HelloController(private val issueRepository: IssueRepository, private val photoRepository: PhotoRepository) {
-	@Autowired
-	private lateinit var awsAdapter: AwsAdapter
-
-	@GetMapping("/")
-	fun hello() = "Hello!"
-
-	@PostMapping("/photo")
-	fun uploadPhoto(@ModelAttribute file: MultipartFile): String {
-		val url = awsAdapter
-			.storeObjectInS3(file, "test/${file.originalFilename!!}", file.contentType!!)
-
-		return url.toString()
-	}
-
-	@GetMapping("/issues")
-	fun getIssues(): MutableList<Issue> {
-		return issueRepository.findAll()
-	}
-
 }
 

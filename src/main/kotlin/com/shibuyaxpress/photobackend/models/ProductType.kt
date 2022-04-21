@@ -14,5 +14,7 @@ data class ProductType(
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "America/Lima")
     var createdAt: LocalDateTime = LocalDateTime.now(),
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "America/Lima")
-    var updatedAt: LocalDateTime? = null
+    var updatedAt: LocalDateTime? = null,
+    var deletedAt: LocalDateTime? = null,
+    var isActive: Boolean = true
 )

@@ -18,11 +18,18 @@ repositories {
 extra["springCloudVersion"] = "Hoxton.SR9"
 
 dependencies {
+	//implementation("org.springframework.plugin:spring-plugin-core:2.0.0.RELEASE")
+	// Swagger
+	implementation("io.springfox:springfox-boot-starter:3.0.0")
+	//firebase dependencies
+	implementation("com.google.firebase:firebase-admin:8.1.0")
 	implementation( "org.imgscalr:imgscalr-lib:4.2")
 	implementation("com.amazonaws:aws-java-sdk-s3")
+	//spring dependencies
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 	implementation("org.springframework.boot:spring-boot-starter-data-rest")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-devtools")
 	//JWT dependencies
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("io.jsonwebtoken:jjwt:0.9.1")
@@ -33,6 +40,7 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
+	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 }
 
 dependencyManagement {

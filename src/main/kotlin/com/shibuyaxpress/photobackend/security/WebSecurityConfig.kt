@@ -24,6 +24,7 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
+import org.springframework.security.config.annotation.web.builders.WebSecurity
 
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import java.lang.Exception
@@ -63,12 +64,27 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
         return super.authenticationManagerBean()
     }
 
+    override fun configure(web: WebSecurity?) {
+        web!!.ignoring().antMatchers("/v2/api-docs",
+            "/configuration/ui",
+            "/swagger-resources/**",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**");
+    }
+
     @Throws(Exception::class)
     override fun configure(httpSecurity: HttpSecurity) {
         // We don't need CSRF for this example
         httpSecurity.csrf().disable().cors().and()
             // dont authenticate this particular request
-            .authorizeRequests().antMatchers("/authenticate","/products/**", "/photos", "/create/account", "auth/user")
+            .authorizeRequests().antMatchers(
+                "/authenticate",
+                "/api/products/**",
+                "/api/sizes/**",
+                "/photos",
+                "/create/account",
+                "auth/user")
             .permitAll()
             .anyRequest()
             // all other requests need to be authenticated
